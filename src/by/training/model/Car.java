@@ -1,6 +1,7 @@
 package by.training.model;
 
 public class Car {
+    private int id;
     private String model;
     private int maxSpeed;
     private float consumptionPer100Km;
@@ -14,6 +15,14 @@ public class Car {
         this.maxSpeed = maxSpeed;
         this.consumptionPer100Km = consumptionPer100Km;
         this.volTank = volTank;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getModel() {

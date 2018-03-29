@@ -4,7 +4,12 @@
     <title>Welcome page</title>
   </head>
   <body>
-<a href="cars">list of cars</a>
-<a href="car">add car</a>
+    <%@include file="../fragments/header.jspf"  %>
+        <a href="car">add car</a>
+        <br>
+        <form action="crud" method="get">
+            <button class="button" name="act" value="list" type="submit">List of car</button>
+        </form>
+    <%@include file="../fragments/footer.jspf"  %>
   </body>
 </html>

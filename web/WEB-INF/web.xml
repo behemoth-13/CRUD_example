@@ -44,4 +44,8 @@
         <servlet-name>car</servlet-name>
         <url-pattern>/car</url-pattern>
     </servlet-mapping>
+
+    <listener>
+        <listener-class>by.training.controller.Listener</listener-class>
+    </listener>
 </web-app>
