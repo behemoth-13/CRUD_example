@@ -57,7 +57,11 @@ public class CarDao {
 
             list.add(car);
         }
-        connection.close();;
+        connection.close();
         return list;
+    }
+
+    public void deleteCar(int id) {
+
     }
 }

@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>by.training.controller.Controller</servlet-class>
+        <servlet-class>by.training.controller.CarController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>

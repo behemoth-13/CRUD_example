@@ -23,7 +23,7 @@
                 <td>${car.volTank}</td>
                 <td>
                     <form action="crud" method="get">
-                        <button class="button" name="id" value="${car.id}" type="submit">List of car</button>
+                        <button class="button" name="id" value="${car.id}" type="submit">delete</button>
                     </form>
                 </td>
             </tr>

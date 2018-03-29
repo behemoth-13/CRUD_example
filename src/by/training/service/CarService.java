@@ -3,14 +3,11 @@ package by.training.service;
 import by.training.dao.CarDao;
 import by.training.model.Car;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CarService {
     private static CarService instance = new CarService();
-    private Validator validator = Validator.getInstance();
     private CarDao dao = CarDao.getInstance();
 
     private CarService(){}
@@ -19,34 +16,27 @@ public class CarService {
         return instance;
     }
 
-    public void addCar(HttpServletRequest request, HttpServletResponse response) {
-        String model = request.getParameter("model").trim();
-        String maxSpeed = request.getParameter("maxSpeed").trim();
-        String consumption = request.getParameter("cons").trim();
-        String volTank = request.getParameter("volTank").trim();
-        String errors = validator.validate(model, maxSpeed, consumption, volTank);
-        if (errors.isEmpty()) {
-            Car car = new Car();
-            car.setModel(model);
-            car.setMaxSpeed(Integer.parseInt(maxSpeed));
-            car.setConsumptionPer100Km(Float.parseFloat(consumption));
-            car.setVolTank(Integer.parseInt(volTank));
-
-            try {
-                dao.addCar(car);
-            } catch (SQLException e) {
-                request.setAttribute("errors", "Please try again");
-            }
-        } else {
-            request.setAttribute("errors", errors);
+    public void addCar(Car car) throws ServiceException{
+        try {
+            dao.addCar(car);
+        } catch (SQLException e) {
+            throw new ServiceException(e.getMessage());
         }
     }
 
-    public void getCars(HttpServletRequest request, HttpServletResponse response) {
+    public List<Car> getCars() throws ServiceException {
         try {
-            request.setAttribute("cars", dao.getCars());
+            return dao.getCars();
         } catch (SQLException | InterruptedException e) {
-            request.setAttribute("errors", "Please try again");
+            throw new ServiceException(e.getMessage());
         }
+    }
+
+    public void deleteCar(int id) throws ServiceException {
+//        try {
+            dao.deleteCar(id);
+//        } catch (SQLException | InterruptedException e) {
+//            throw new ServiceException(e.getMessage());
+//        }
     }
 }
