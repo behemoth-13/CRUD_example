@@ -5,5 +5,10 @@
   </head>
   <body>
   HEADER
+  <a href="car">add car</a>
+          <br>
+          <form action="crud" method="get">
+              <button class="button" name="act" value="list" type="submit">List of car</button>
+          </form>
   </body>
 </html>

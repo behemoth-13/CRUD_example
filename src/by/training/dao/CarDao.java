@@ -48,20 +48,45 @@ public class CarDao {
 
         while (set.next()) {
             Car car = new Car();
-
-            car.setId(set.getInt(COLUMN_ID));
-            car.setModel(set.getString(COLUMN_MODEL));
-            car.setMaxSpeed(set.getInt(COLUMN_MAX_SPEED));
-            car.setConsumptionPer100Km(set.getFloat(COLUMN_CONSUMPTION));
-            car.setVolTank(set.getInt(COLUMN_VOLUME_TANK));
-
+            fillCar(car, set);
             list.add(car);
         }
         connection.close();
         return list;
     }
 
-    public void deleteCar(int id) {
+    public void deleteCar(int id) throws SQLException {
+        Connection connection = util.getConnection();
+        String query = SqlQueries.SQL_DEL_CAR_BY_ID;
+        PreparedStatement ps = connection.prepareStatement(query);
 
+        ps.setInt(1, id);
+        ps.execute();
+
+        connection.close();
+    }
+
+    public Car getCarById(int id) throws SQLException {
+        Car car = null;
+        Connection connection = util.getConnection();
+        String query = SqlQueries.SQL_GET_CAR_BY_ID;
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet set = ps.executeQuery();
+
+        if (set.next()) {
+            car = new Car();
+            fillCar(car, set);
+        }
+        connection.close();
+        return car;
+    }
+
+    private void fillCar(Car car, ResultSet set) throws SQLException {
+        car.setId(set.getInt(COLUMN_ID));
+        car.setModel(set.getString(COLUMN_MODEL));
+        car.setMaxSpeed(set.getInt(COLUMN_MAX_SPEED));
+        car.setConsumptionPer100Km(set.getFloat(COLUMN_CONSUMPTION));
+        car.setVolTank(set.getInt(COLUMN_VOLUME_TANK));
     }
 }

@@ -6,6 +6,7 @@
   </head>
   <body>
     <%@include file="../fragments/header.jspf" %>
+        <br>
         <h2>Cars</h2>
         <table class="table">
             <tr>
@@ -13,6 +14,7 @@
                 <th>max speed</th>
                 <th>consumption</th>
                 <th>volume tank</th>
+                <th>edit<th>
                 <th>delete</th>
             </tr>
             <c:forEach items="${requestScope.cars}" var = "car" >
@@ -23,7 +25,14 @@
                 <td>${car.volTank}</td>
                 <td>
                     <form action="crud" method="get">
+                        <button class="button" name="id" value="${car.id}" type="submit">edit</button>
+                        <input type="hidden" name="act" value="edit">
+                    </form>
+                <td>
+                <td>
+                    <form action="crud" method="get">
                         <button class="button" name="id" value="${car.id}" type="submit">delete</button>
+                        <input type="hidden" name="act" value="del">
                     </form>
                 </td>
             </tr>

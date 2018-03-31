@@ -8,19 +8,19 @@
         Car Parameters
         <form action="crud" method="post">
 
-            Model <input type="text" maxlength="15" name="model" id="modelForm"">
+            Model <input type="text" maxlength="15" name="model" id="modelForm" value="${car.model}">
             <p id="model" style="color: #2BC6A4">model var</p>
             <br>
 
-            Maximal speed <input type="text" maxlength="15" name="maxSpeed" id="maxSpeedForm" onKeyUp="check('maxSpeed')">
+            Maximal speed <input type="text" maxlength="15" name="maxSpeed" id="maxSpeedForm" onKeyUp="check('maxSpeed')" value="${car.maxSpeed}">
             <p id="maxSpeed" style="color: #2BC6A4">${val_capacity}<sup>3</sup></p>
             <br>
 
-            Consumption per 100 km <input type="text" maxlength="15" name="cons" id="consForm" onKeyUp="check('cons')">
+            Consumption per 100 km <input type="text" maxlength="15" name="cons" id="consForm" onKeyUp="check('cons')" value="${car.consumptionPer100Km}">
             <p id="cons" style="color: #FF3D3D">${val_distance}</p>
             <br>
 
-            Volume tank <input type="text" maxlength="4" name="volTank" id="volTankForm" onKeyUp="check('volTank')">
+            Volume tank <input type="text" maxlength="4" name="volTank" id="volTankForm" onKeyUp="check('volTank')" value="${car.volTank}">
             <p id="volTank" style="color: #FF3D3D">${val_distance}</p>
             <br>
 

@@ -21,20 +21,26 @@ public class CarController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Car car = validator.getValidCar(request);
+        String page;
         if (car != null) {
             try {
                 service.addCar(car);
+                page = "/pages/list.jsp";
             } catch (ServiceException e) {
                 request.setAttribute("errors", "Please try again");
+                page = "/pages/list.jsp";
             }
+        } else {
+            page = "/pages/list.jsp";
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/pages/index.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        String page = "/pages/index.jsp";
         switch (request.getParameter("act")) {
             case "list" : {
                 try {
@@ -43,20 +49,43 @@ public class CarController extends HttpServlet{
                 } catch (ServiceException e) {
                     request.setAttribute("errors", "Please try again");
                 }
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/pages/list.jsp");
-                dispatcher.forward(request, response);
+                page = "/pages/list.jsp";
+                break;
             }
             case "del" : {
                 try {
                     int id = validator.getValidId(request);
                     if (id > 0) {
                         service.deleteCar(id);
+                    } else {
+                        request.setAttribute("errors", "Wrong data");
                     }
                 } catch (ServiceException e) {
                     request.setAttribute("errors", "Please try again");
                 }
+                page = "/pages/list.jsp";
+                break;
+            }
+            case "edit" : {
+                try {
+                    int id = validator.getValidId(request);
+                    if (id > 0) {
+                        Car car = service.getCarById(id);
+                        request.setAttribute("car", car);
+                        page = "/pages/car.jsp";
+                    } else {
+                        request.setAttribute("errors", "Wrong data");
+                        page = "/pages/list.jsp";
+                    }
+                } catch (ServiceException e) {
+                    page = "/pages/list.jsp";
+                    request.setAttribute("errors", "Please try again");
+                }
+                break;
             }
         }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+        dispatcher.forward(request, response);
     }
 
 

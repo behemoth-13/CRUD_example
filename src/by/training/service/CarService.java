@@ -33,10 +33,18 @@ public class CarService {
     }
 
     public void deleteCar(int id) throws ServiceException {
-//        try {
+        try {
             dao.deleteCar(id);
-//        } catch (SQLException | InterruptedException e) {
-//            throw new ServiceException(e.getMessage());
-//        }
+        } catch (SQLException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public Car getCarById(int id) throws ServiceException {
+        try {
+            return dao.getCarById(id);
+        } catch (SQLException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 }
