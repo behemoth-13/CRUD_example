@@ -17,4 +17,8 @@ public class Listener implements HttpSessionListener {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+    }
 }
