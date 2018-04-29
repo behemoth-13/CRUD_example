@@ -1,10 +1,23 @@
 package by.training.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Car {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String model;
+
+    @Column(name = "max_speed")
     private int maxSpeed;
+
+    @Column(name = "consumption")
     private float consumptionPer100Km;
+
+    @Column(name = "volume_tank")
     private int volTank;
 
     public Car() {
