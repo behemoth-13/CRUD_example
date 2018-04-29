@@ -3,7 +3,6 @@ package by.training.dao.jdbcImpl;
 import by.training.dao.CarDao;
 import by.training.dao.DaoException;
 import by.training.dao.MySqlUtil;
-import by.training.dao.SqlQueries;
 import by.training.model.Car;
 
 import java.sql.Connection;
@@ -20,6 +19,11 @@ public class CarDaoJdbc implements CarDao{
     private static final String COLUMN_CONSUMPTION = "consumption";
     private static final String COLUMN_VOLUME_TANK = "volume_tank";
 
+    private static final String SQL_ADD = "INSERT INTO car(model, max_speed, consumption, volume_tank) VALUES (?, ?, ?, ?)";
+    private static final String SQL_GET_ALL = "SELECT * FROM car ORDER BY model";
+    private static final String SQL_DEL_BY_ID = "DELETE FROM car WHERE id = ?";
+    private static final String SQL_GET_BY_ID = "SELECT * FROM car WHERE id = ?";
+
     private static CarDaoJdbc instance = new CarDaoJdbc();
     private MySqlUtil util = MySqlUtil.getInstance();
 
@@ -33,8 +37,7 @@ public class CarDaoJdbc implements CarDao{
     public void addCar(Car car) throws DaoException {
         try {
             Connection connection = util.getConnection();
-            String query = SqlQueries.SQL_ADD_CAR;
-            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(SQL_ADD);
 
             ps.setString(1, car.getModel());
             ps.setInt(2, car.getMaxSpeed());
@@ -53,8 +56,7 @@ public class CarDaoJdbc implements CarDao{
         try {
             List<Car> list = new ArrayList<>();
             Connection connection = util.getConnection();
-            String query = SqlQueries.SQL_GET_CARS;
-            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(SQL_GET_ALL);
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
@@ -73,8 +75,7 @@ public class CarDaoJdbc implements CarDao{
     public void deleteCar(int id) throws DaoException {
         try {
             Connection connection = util.getConnection();
-            String query = SqlQueries.SQL_DEL_CAR_BY_ID;
-            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(SQL_DEL_BY_ID);
 
             ps.setInt(1, id);
             ps.execute();
@@ -91,8 +92,7 @@ public class CarDaoJdbc implements CarDao{
         try {
             Car car = null;
             Connection connection = util.getConnection();
-            String query = SqlQueries.SQL_GET_CAR_BY_ID;
-            PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(SQL_GET_BY_ID);
             ps.setInt(1, id);
             ResultSet set = ps.executeQuery();
 

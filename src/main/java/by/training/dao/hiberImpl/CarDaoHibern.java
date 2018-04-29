@@ -2,7 +2,6 @@ package by.training.dao.hiberImpl;
 
 import by.training.dao.CarDao;
 import by.training.dao.MySqlUtil;
-import by.training.dao.SqlQueries;
 import by.training.model.Car;
 import org.hibernate.Session;
 import org.hibernate.query.Query;

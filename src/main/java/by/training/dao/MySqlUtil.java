@@ -3,6 +3,7 @@ package by.training.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -14,20 +15,8 @@ public class MySqlUtil {
 
     private static SessionFactory sessionFactory = null;
 
-    private String url;
-    private String login;
-    private String password;
-
-    private MySqlUtil() {}
-
-    public void init(String url, String login, String password, String driverName) throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
-        this.url = url;
-        this.login = login;
-        this.password = password;
+    private MySqlUtil() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
-//        Driver driver = (Driver) Class.forName(driverName).newInstance();
-//        DriverManager.registerDriver(driver);
-//        DriverManager.getConnection(url, login, password);
     }
 
     public static MySqlUtil getInstance() {
@@ -35,7 +24,8 @@ public class MySqlUtil {
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, login, password);
+        return sessionFactory.getSessionFactoryOptions().getServiceRegistry().
+                getService(ConnectionProvider.class).getConnection();
     }
 
     public Session getSession() {
