@@ -46,6 +46,6 @@
     </servlet-mapping>
 
     <listener>
-        <listener-class>by.training.controller.Listener</listener-class>
+        <listener-class>by.training.controller.Initializer</listener-class>
     </listener>
 </web-app>
