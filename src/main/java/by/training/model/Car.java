@@ -1,6 +1,7 @@
 package by.training.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -9,9 +10,13 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn( name = "owner_id" )
-    private Owner owner;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "car_owner",
+            joinColumns = { @JoinColumn(name = "car_id") },
+            inverseJoinColumns = { @JoinColumn(name = "owner_id") }
+    )
+    private List<Owner> owners;
 
     private String model;
 
@@ -30,14 +35,6 @@ public class Car {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 
     public String getModel() {
@@ -72,7 +69,13 @@ public class Car {
         this.volTank = volTank;
     }
 
+    public List<Owner> getOwners() {
+        return owners;
+    }
 
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
+    }
 
     @Override
     public String toString() {

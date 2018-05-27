@@ -16,7 +16,7 @@ public class Owner {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy="owner")
+    @ManyToMany(mappedBy="owners")
     private List<Car> cars;
 
     public int getId() {
