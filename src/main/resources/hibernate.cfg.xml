@@ -15,7 +15,7 @@
         <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
@@ -32,6 +32,7 @@
         <!-- <property name="hibernate.search.default.directory_provider">filesystem</property>
             <property name="hibernate.search.default.indexBase">target/indexes</property> -->
         <mapping class="by.training.model.Car" />
+        <mapping class="by.training.model.Owner" />
 
     </session-factory>
 </hibernate-configuration>

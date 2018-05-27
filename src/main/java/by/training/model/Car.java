@@ -9,6 +9,10 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    @JoinColumn( name = "owner_id" )
+    private Owner owner;
+
     private String model;
 
     @Column(name = "max_speed")
@@ -20,22 +24,20 @@ public class Car {
     @Column(name = "volume_tank")
     private int volTank;
 
-    public Car() {
-    }
-
-    public Car(String model, int maxSpeed, float consumptionPer100Km, int volTank) {
-        this.model = model;
-        this.maxSpeed = maxSpeed;
-        this.consumptionPer100Km = consumptionPer100Km;
-        this.volTank = volTank;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public String getModel() {
@@ -69,6 +71,8 @@ public class Car {
     public void setVolTank(int volTank) {
         this.volTank = volTank;
     }
+
+
 
     @Override
     public String toString() {

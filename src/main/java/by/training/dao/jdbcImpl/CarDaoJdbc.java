@@ -19,7 +19,7 @@ public class CarDaoJdbc implements CarDao{
     private static final String COLUMN_CONSUMPTION = "consumption";
     private static final String COLUMN_VOLUME_TANK = "volume_tank";
 
-    private static final String SQL_ADD = "INSERT INTO car(model, max_speed, consumption, volume_tank) VALUES (?, ?, ?, ?)";
+    private static final String SQL_ADD = "INSERT INTO car(model, max_speed, consumption, owner_id) VALUES (?, ?, ?, ?)";
     private static final String SQL_GET_ALL = "SELECT * FROM car ORDER BY model";
     private static final String SQL_DEL_BY_ID = "DELETE FROM car WHERE id = ?";
     private static final String SQL_GET_BY_ID = "SELECT * FROM car WHERE id = ?";
@@ -34,7 +34,7 @@ public class CarDaoJdbc implements CarDao{
     }
 
     @Override
-    public void addCar(Car car) throws DaoException {
+    public void save(Car car) throws DaoException {
         try {
             Connection connection = util.getConnection();
             PreparedStatement ps = connection.prepareStatement(SQL_ADD);
@@ -52,7 +52,7 @@ public class CarDaoJdbc implements CarDao{
     }
 
     @Override
-    public List<Car> getCars() throws DaoException {
+    public List<Car> getAll() throws DaoException {
         try {
             List<Car> list = new ArrayList<>();
             Connection connection = util.getConnection();
@@ -72,7 +72,7 @@ public class CarDaoJdbc implements CarDao{
     }
 
     @Override
-    public void deleteCar(int id) throws DaoException {
+    public void delete(int id) throws DaoException {
         try {
             Connection connection = util.getConnection();
             PreparedStatement ps = connection.prepareStatement(SQL_DEL_BY_ID);
@@ -88,7 +88,7 @@ public class CarDaoJdbc implements CarDao{
     }
 
     @Override
-    public Car getCarById(int id) throws DaoException {
+    public Car getById(int id) throws DaoException {
         try {
             Car car = null;
             Connection connection = util.getConnection();

@@ -13,6 +13,6 @@ public class Destroyer implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        MySqlUtil.getInstance().close();
+//        MySqlUtil.getInstance().close();
     }
 }

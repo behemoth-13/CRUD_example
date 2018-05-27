@@ -13,10 +13,11 @@ import java.sql.SQLException;
 public class MySqlUtil {
     private static MySqlUtil instance = new MySqlUtil();
 
-    private static SessionFactory sessionFactory = null;
+    private SessionFactory sessionFactory = null;
 
     private MySqlUtil() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
+        System.out.println("sessionFactory==null " + (sessionFactory ==null));
     }
 
     public static MySqlUtil getInstance() {

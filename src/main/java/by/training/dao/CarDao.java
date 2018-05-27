@@ -5,8 +5,8 @@ import by.training.model.Car;
 import java.util.List;
 
 public interface CarDao {
-    void addCar(Car car) throws DaoException;
-    List<Car> getCars() throws DaoException;
-    void deleteCar(int id) throws DaoException;
-    Car getCarById(int id) throws DaoException;
+    void save(Car car) throws DaoException;
+    List<Car> getAll() throws DaoException;
+    void delete(int id) throws DaoException;
+    Car getById(int id) throws DaoException;
 }

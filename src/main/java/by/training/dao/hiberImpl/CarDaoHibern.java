@@ -22,7 +22,7 @@ public class CarDaoHibern implements CarDao{
     }
 
     @Override
-    public void addCar(Car car) {
+    public void save(Car car) {
         Session session = util.getSession();
         session.beginTransaction();
         session.save(car);
@@ -31,7 +31,7 @@ public class CarDaoHibern implements CarDao{
     }
 
     @Override
-    public List<Car> getCars() {
+    public List<Car> getAll() {
         Session session = util.getSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -46,7 +46,7 @@ public class CarDaoHibern implements CarDao{
     }
 
     @Override
-    public void deleteCar(int id) {
+    public void delete(int id) {
         Session session = util.getSession();
         session.beginTransaction();
         Car car = new Car();
@@ -57,7 +57,7 @@ public class CarDaoHibern implements CarDao{
     }
 
     @Override
-    public Car getCarById(int id) {
+    public Car getById(int id) {
         Session session = util.getSession();
         session.beginTransaction();
         Car car = session.get(Car.class, id);

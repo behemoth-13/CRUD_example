@@ -19,7 +19,7 @@ public class CarService {
 
     public void addCar(Car car) throws ServiceException{
         try {
-            dao.addCar(car);
+            dao.save(car);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -27,7 +27,7 @@ public class CarService {
 
     public List<Car> getCars() throws ServiceException {
         try {
-            return dao.getCars();
+            return dao.getAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -35,7 +35,7 @@ public class CarService {
 
     public void deleteCar(int id) throws ServiceException {
         try {
-            dao.deleteCar(id);
+            dao.delete(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -43,7 +43,7 @@ public class CarService {
 
     public Car getCarById(int id) throws ServiceException {
         try {
-            return dao.getCarById(id);
+            return dao.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
